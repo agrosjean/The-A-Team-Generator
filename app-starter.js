@@ -18,10 +18,20 @@ function appMenu() {
     function createManager() {
         console.log("Please build your team");
         inquirer.prompt([
-            //
-            // YOUR CODE HERE:
-            // CREATE OBJECTS OF QUESTIONS HERE FOR MANAGER
-            //
+            {
+                message: "What is your team manager's name?",
+                name: "name"
+            },
+            {
+                message: "What is your team manager's email address?",
+                name: "email"
+            },
+
+            {
+                type: "number",
+                message: "What is your team manager's office number?",
+                name: "officeNumber"
+            },
         ]).then(answers => {
             const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
             teamMembers.push(manager);
@@ -59,18 +69,25 @@ function appMenu() {
 
     function addEngineer() {
         inquirer.prompt([
-            //
-            // YOUR CODE HERE
-            // CREATE OBJECTS OF QUESTIONS FOR ENGINEER
-            //
+            {
+                message: "What is your team Engineer's name?",
+                name: "name"
+            },
+            {
+                message: "What is your team Engineer's email address?",
+                name: "email"
+            },
+
+            {
+                type: "number",
+                message: "What is your team Engineer's office number?",
+                name: "officeNumber"
+            },
         ]).then(answers => {
-            //
-            // YOUR CODE HERE
-            // 1. CREATE A VARIABLE TO STORE THE ENGINEER OBJECT INSTANTIATED WITH THE ENGINEER CLASS, PASSING ANSWERS PROPERTIES AS INPUT AURGUMENTS 
-            //    TO THE ENGINEER CLASS CONSTRUCTOR
-            // 2. ADD (PUSH) THE ENGINEER VARIABLE TO the teamMembers ARRAY
-            // 3. ADD (PUSH) THE ENGINERR ID TO THE idArray ARRAY
-            // 
+
+            const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerOfficeNumber);
+            teamMembers.push(engineer);
+            idArray.push(answers.engineerId);
 
             createTeam();
         });
@@ -78,18 +95,25 @@ function appMenu() {
 
     function addIntern() {
         inquirer.prompt([
-            //
-            // YOUR CODE HERE
-            // CREATE OBJECTS OF QUESTIONS FOR ENGINEER
-            //
+            {
+                message: "What is your team Intern's name?",
+                name: "name"
+            },
+            {
+                message: "What is your team Intern's email address?",
+                name: "email"
+            },
+
+            {
+                type: "number",
+                message: "What is your team Intern's office number?",
+                name: "officeNumber"
+            },
         ]).then(answers => {
-            //
-            // YOUR CODE HERE
-            // 1. CREATE A VARIABLE TO STORE THE INTERN OBJECT INSTANTIATED WITH THE INTERN CLASS, PASSING ANSWERS PROPERTIES AS INPUT AURGUMENTS 
-            //    TO THE INTERN CLASS CONSTRUCTOR
-            // 2. ADD (PUSH) THE INTERN VARIABLE TO the teamMembers ARRAY
-            // 3. ADD (PUSH) THE INTERN ID TO THE idArray ARRAY
-            // 
+
+            const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internOfficeNumber);
+            teamMembers.push(intern);
+            idArray.push(answers.internId);
 
             createTeam();
         });
