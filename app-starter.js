@@ -1,6 +1,6 @@
-const Manager = require("./lib/Manager");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
+const Manager = require("./classes/manager");
+const Engineer = require("./classes/engineer");
+const Intern = require("./classes/intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
@@ -11,6 +11,8 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 const teamMembers = [];
+let lastId = 0;
+const getUniqueId = () => ++lastId;
 const idArray = [];
 
 function appMenu() {
@@ -33,9 +35,9 @@ function appMenu() {
                 name: "officeNumber"
             },
         ]).then(answers => {
-            const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
+            const manager = new Manager(answers.name, getUniqueId(), answers.email, answers.officeNumber);
             teamMembers.push(manager);
-            idArray.push(answers.managerId);
+            idArray.push(manager.id);
             createTeam();
         });
     }
@@ -80,14 +82,13 @@ function appMenu() {
 
             {
                 type: "number",
-                message: "What is your team Engineer's office number?",
-                name: "officeNumber"
+                message: "What is your team Engineer's Github profile link?",
+                name: "githubProfile"
             },
         ]).then(answers => {
-
-            const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerOfficeNumber);
+            const engineer = new Engineer(answers.name, getUniqueId(), answers.email, answers.githubProfile);
             teamMembers.push(engineer);
-            idArray.push(answers.engineerId);
+            idArray.push(engineer.id);
 
             createTeam();
         });
@@ -106,14 +107,14 @@ function appMenu() {
 
             {
                 type: "number",
-                message: "What is your team Intern's office number?",
-                name: "officeNumber"
+                message: "What is your team Intern's school?",
+                name: "school"
             },
         ]).then(answers => {
 
-            const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internOfficeNumber);
+            const intern = new Intern(answers.name, getUniqueId(), answers.email, answers.school);
             teamMembers.push(intern);
-            idArray.push(answers.internId);
+            idArray.push(intern.id);
 
             createTeam();
         });
